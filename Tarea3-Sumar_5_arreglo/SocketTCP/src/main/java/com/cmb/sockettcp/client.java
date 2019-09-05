@@ -1,4 +1,4 @@
-package com.cmb.sockettcp;
+package sockettcp;
 
 import java.io.*;
 import java.net.*;
@@ -10,28 +10,33 @@ public class client {
         try{
             InputStreamReader isr = new InputStreamReader(System.in);
             BufferedReader br = new BufferedReader(isr);
+            //System.out.print("Introduzca una cadena : ");
+            //String cadena = br.readLine();
 
-            Scanner sc = new Scanner(System.in);
-            String cadena = "";
-            int num;
+            String vector[]  = new String[5];
+            Scanner entrada = new Scanner(System.in);
 
-            for (int i = 1; i < 11 ; i++) {
-                System.out.print("Introduzca el " + i + " numero: ");
-                num = sc.nextInt();
-                cadena += Integer.toString(num) + ",";
+            for(int i = 0; i < 5; i++) {
+                System.out.print("Introduzca el numero del arreglo " + i + " = ");
+                vector[i] = entrada.nextLine();
             }
 
-            
+            String envio = String.join(",", vector);
+
             Socket client = new Socket("localhost", port); //conectarse al socket
-            
             PrintStream toServer = new PrintStream(client.getOutputStream());
             BufferedReader fromServer = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            
-            toServer.println(cadena);  //mandar alservidor 
-            String result = fromServer.readLine();  // devolver del servidor
-            System.out.println("cadena devuelta es: "+result);
-            
-           
+
+
+            toServer.println(envio);  //mandar alservidor
+
+            String result = fromServer.readLine();  // respuesta del servidor
+            String resp[] = result.split(",");
+
+            System.out.println("El vector devuelto es:");
+            for(int i = 0; i < 5; i++) {
+                System.out.println("Resultado del arreglo sumado es = " + resp[i]);
+            }
 
         }
         catch(IOException e){
