@@ -5,11 +5,9 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Scanner;
 
-public class ServidorReserva  extends UnicastRemoteObject implements ServidorReservaInterface {
+public class ServidorReserva  extends UnicastRemoteObject implements IServidorReserva {
     protected ServidorReserva() throws RemoteException {
         super();
     }
@@ -25,14 +23,14 @@ public class ServidorReserva  extends UnicastRemoteObject implements ServidorRes
             s+=precios[i];
         }
         System.out.println("total"+s);
-        BancoCentralInterface cotizar;
+        IBancoCentral cotizar;
 
         String cadena;
 
         //Scanner entrada = new Scanner(System.in);
         double dolar;
         try {
-            cotizar=(BancoCentralInterface) Naming.lookup("rmi://localhost/Cotizar");
+            cotizar=(IBancoCentral) Naming.lookup("rmi://localhost/Cotizar");
             dolar = cotizar.cotizacionDolar(fechaCotizacion);
             return  dolar*s;
 

@@ -5,14 +5,14 @@ public class Cliente {
 
     public static void main(String args[]){
 
-        ServidorReservaInterface hotel;
+        IServidorReserva hotel;
 
         String cadena;
 
         Scanner entrada = new Scanner(System.in);
 
         try {
-            hotel=(ServidorReservaInterface) Naming.lookup("rmi://localhost/Hotel");
+            hotel=(IServidorReserva) Naming.lookup("rmi://localhost/Hotel");
             System.out.println("Opciones: ");
             System.out.println( "     1) Cotizar ");
             System.out.println( "     2) Reservar");
