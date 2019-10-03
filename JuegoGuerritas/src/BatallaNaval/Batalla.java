@@ -3,15 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juegoguerritas;
-
-import java.util.Scanner;
+package BatallaNaval;
 
 /**
  *
  * @author Carlos
  */
-public class JuegoGuerritas {
+public class Batalla {
 
     /**
      * @param args the command line arguments

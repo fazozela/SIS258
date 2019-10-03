@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package juegoguerritas;
+package BatallaNaval;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -14,14 +14,14 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author Carlos
  */
-public class Guerrita extends UnicastRemoteObject implements IGuerrita {
+public class BatallaServer extends UnicastRemoteObject implements IBatalla {
     private int [][] tablero1=new int[10][10];
     private int [][] tablero2=new int[10][10];
     public static int turno=0;
 
     int estado=0;
 
-    public Guerrita() throws RemoteException {
+    public BatallaServer() throws RemoteException {
         super();
     }
 
@@ -29,11 +29,11 @@ public class Guerrita extends UnicastRemoteObject implements IGuerrita {
     public static void main(String args[]) {
 
         try {
-            Guerrita guerrita;
+            BatallaServer batallaServer;
             LocateRegistry.createRegistry(1099);
-            guerrita = new Guerrita();
-            guerrita.iniciarpartida();
-            Naming.bind("Guerrita", guerrita);
+            batallaServer = new BatallaServer();
+            batallaServer.iniciarpartida();
+            Naming.bind("Guerrita", batallaServer);
             System.out.println("juego esta listo\n");
         }
         catch (Exception e){
